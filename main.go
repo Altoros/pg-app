@@ -25,7 +25,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	conn, err := sql.Open("postgres", services["p-postgresql"][0].Credentials.Url)
+	service := os.Getenv("PG_BROKER_NAME")
+
+	if service == "" {
+		log.Fatal("$PG_BROKER_NAME is not set")
+	}
+
+	conn, err := sql.Open("postgres", services[service][0].Credentials.Url)
 
 	if err != nil {
 		log.Fatal(err)
@@ -41,6 +47,7 @@ func main() {
 		conn.QueryRow("SELECT version()").Scan(&ver)
 
 		rw.Write([]byte(ver))
+		rw.Write([]byte("\n"))
 	})
 
 	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
