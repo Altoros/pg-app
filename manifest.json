@@ -1,8 +1,5 @@
 {
     "dependencies": {
-        "github.com/Altoros/pg-puppeteer-go": {
-            "branch": "master"
-        },
         "github.com/lib/pq": {
             "branch": "master"
         }

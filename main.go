@@ -7,21 +7,21 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Altoros/pg-puppeteer-go"
 	_ "github.com/lib/pq"
 )
 
 type service struct {
-	Name        string          `json:"name"`
-	Label       string          `json:"label"`
-	Tags        []string        `json:"tags"`
-	Plan        string          `json:"plan"`
-	Credentials pgp.Credentials `json:"credentials"`
+	Name        string   `json:"name"`
+	Label       string   `json:"label"`
+	Tags        []string `json:"tags"`
+	Plan        string   `json:"plan"`
+	Credentials struct {
+		Url string `json:"url"`
+	} `json:"credentials"`
 }
 
 func main() {
 	var services map[string][]service
-
 	if err := json.Unmarshal([]byte(os.Getenv("VCAP_SERVICES")), &services); err != nil {
 		log.Fatal(err)
 	}
@@ -48,7 +48,5 @@ func main() {
 		rw.Write([]byte("\n"))
 	})
 
-	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
-		log.Fatal(err)
-	}
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
 }
