@@ -3,11 +3,12 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
-	"github.com/altoros/pg-puppeteer-go"
-	_ "github.com/lib/pq"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/Altoros/pg-puppeteer-go"
+	_ "github.com/lib/pq"
 )
 
 type service struct {
@@ -26,13 +27,11 @@ func main() {
 	}
 
 	service := os.Getenv("PG_BROKER_NAME")
-
 	if service == "" {
 		log.Fatal("$PG_BROKER_NAME is not set")
 	}
 
 	conn, err := sql.Open("postgres", services[service][0].Credentials.Url)
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -43,7 +42,6 @@ func main() {
 
 	http.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
 		var ver string
-
 		conn.QueryRow("SELECT version()").Scan(&ver)
 
 		rw.Write([]byte(ver))

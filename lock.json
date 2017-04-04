@@ -1,0 +1,21 @@
+{
+    "memo": "0c88e6ba89c7a6ff64fabbc15dcde7a78ec47b24f93051f10dc6c169c7a3b2d5",
+    "projects": [
+        {
+            "name": "github.com/Altoros/pg-puppeteer-go",
+            "branch": "master",
+            "revision": "7f7c93a161c76b1f226df7bcbdc14011ed6ccdce",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/lib/pq",
+            "branch": "master",
+            "revision": "2704adc878c21e1329f46f6e56a1c387d788ff94",
+            "packages": [
+                "."
+            ]
+        }
+    ]
+}
