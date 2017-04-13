@@ -1,6 +1,10 @@
+---
 applications:
 - name: pg-app
-  memory: 64M
-  disk: 64M
+  command: pg-app
+  memory: 32M
+  disk: 32M
+  buildpack: https://github.com/cloudfoundry/go-buildpack#v1.8.1
   env:
-    GOPACKAGENAME: pg-app
+    GOVERSION: go1.8.1
+    GOPACKAGENAME: github.com/Altoros/pg-app
